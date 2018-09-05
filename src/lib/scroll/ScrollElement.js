@@ -18,7 +18,8 @@ class ScrollElement extends Component {
   constructor() {
     super()
     this.state = {
-      isDragging: false
+      isDragging: false,
+      speed: 1
     }
   }
 
@@ -54,7 +55,8 @@ class ScrollElement extends Component {
       const parentPosition = getParentPosition(e.currentTarget)
       const xPosition = e.clientX - parentPosition.x
 
-      const speed = e.ctrlKey ? 10 : e.metaKey ? 3 : 1
+      //const speed = e.ctrlKey ? 10 : e.metaKey ? 3 : 1;
+      const speed = this.state.speed;
 
       // convert vertical zoom to horiziontal
       this.props.onWheelZoom(speed, xPosition, e.deltaY)
@@ -75,7 +77,7 @@ class ScrollElement extends Component {
           const parentPosition = getParentPosition(e.currentTarget)
           const xPosition = e.clientX - parentPosition.x
 
-          this.props.onWheelZoom(10, xPosition, e.deltaY)
+          this.props.onWheelZoom(this.state.speed, xPosition, e.deltaY)
         }
       }
     }
